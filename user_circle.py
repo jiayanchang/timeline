@@ -11,7 +11,7 @@ import config
 import datetime
 
 
-client = MongoClient(config.devd_mongo_config['host'])
+client = MongoClient(config.timeline_mongo_host['host'])
 db = client.circle
 
 
