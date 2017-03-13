@@ -22,7 +22,7 @@ def get(user_id):
     return db.user_follow.find_one({"user_id": user_id}).denny()
 
 def get_friends(user_id, offset=0, limit=10):
-    return db.user_follow.find_one({"user_id":user_id}, {"f_ids":{"$slice":[offset, limit]}})
+    return db.user_follow.find_one({"user_id":user_id}, {"f_ids": {"$slice": [offset, limit]}})
 
 def is_friend(user_id, to_id):
     return dumps(db.user_follow.find(
