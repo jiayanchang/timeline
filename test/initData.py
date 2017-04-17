@@ -56,24 +56,24 @@ def insertUserToCircle(circleId, users):
 
 circlefile = open("circleId.txt")
 userfile = open("prod_10w.txt")
+
 line = userfile.readline()
+circleId = circlefile.readline()
 
-users = []
-while line:
-    userId = line.split('\t')[0]
-    users.append({"userId": userId, "userRole": 0, "mobile": str('18000000000'), "sex": -1, "joinTime": datetime.datetime.now()})
-    line = userfile.readline()
-
-    if len(users) < 10000:
-        continue
-
-    insertUserToCircle(users)
-
-    print len(users)
+while circleId:
     users = []
+    while line:
+        userId = line.split('\t')[0]
+        users.append({"userId": userId, "userRole": 0, "mobile": str('18000000000'), "sex": -1, "joinTime": datetime.datetime.now()})
+        line = userfile.readline()
 
+        if len(users) < 10000:
+            continue
 
-    # circleId = circlefile.readline()
-    # while circleId:
-    # insertUserToCircle(circleId, userId)
-    #         circleId = userfile.readline()
+        insertUserToCircle(circleId, users)
+
+        print len(users)
+        users = []
+
+    circleId = userfile.readline()
+
