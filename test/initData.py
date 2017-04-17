@@ -22,8 +22,7 @@ def insertUserToCircle(circleId, users):
 
     record = db.circle_user_page.find({"circleId": ObjectId(circleId)}, {"circleId": 1}).limit(1)
     if record:
-        db.circle_user_page.update_one({"circleId": ObjectId(circleId), "pageIndex": 1},
-                                   {"$push": {"users": users}})
+        db.circle_user_page.update_one({"circleId": ObjectId(circleId), "pageIndex": 1}, {"$push": {"users": users}}, False)
     else:
         db.circle_user_page.insert({
             "circleId": "58ede8ad0cf28b716ec4cb02",
@@ -40,7 +39,7 @@ def insertUserToCircle(circleId, users):
             "circleId": circleId,
             "userRole": 0,
             "joinTime": datetime.datetime.now()
-        }}}))
+        }}}), False)
     else:
         db.user_circle_relationship.insert({
             "userId": userId,
