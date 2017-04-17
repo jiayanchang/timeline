@@ -57,15 +57,15 @@ for circleId in circleIds:
 print 'userPages', len(userPages)
 
 relatives = []
-for user in users:
-    circles = []
-    for circleId in circleIds:
-        circles.append({
-            "circleId": circleId,
-            "userRole": 0,
-            "joinTime": datetime.datetime.now()
-        })
+circles = []
+for circleId in circleIds:
+    circles.append({
+        "circleId": circleId,
+        "userRole": 0,
+        "joinTime": datetime.datetime.now()
+    })
 
+for user in users:
     relatives.append({
         "userId": userId,
         "circles": circles
