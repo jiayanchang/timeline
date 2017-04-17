@@ -9,12 +9,12 @@ from bson.json_util import dumps
 import threading
 
 import random
-import test.test_conf
+import test_conf
 import datetime
 import time
 
 
-client = MongoClient(test.test_conf.timeline_mongo_host['host'])
+client = MongoClient(test_conf.timeline_mongo_host['host'])
 db = client.circle_info
 
 
@@ -54,7 +54,7 @@ def insertUserToCircle(circleId, users):
         })
 
 
-circlefile = open("circleid.txt")
+circlefile = open("circleId.txt")
 userfile = open("prod_10w.txt")
 line = userfile.readline()
 
