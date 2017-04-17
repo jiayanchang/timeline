@@ -35,11 +35,11 @@ def insertUserToCircle(circleId, users):
     record = db.user_circle_relationship.find({"userId": userId}).limit(1)
 
     if record:
-        db.user_circle_relationship.update_one(({"userId": userId}, {"$push": {"circles": {
+        db.user_circle_relationship.update_one({"userId": userId}, {"$push": {"circles": {
             "circleId": circleId,
             "userRole": 0,
             "joinTime": datetime.datetime.now()
-        }}}), False)
+        }}}, False)
     else:
         db.user_circle_relationship.insert({
             "userId": userId,
