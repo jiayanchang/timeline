@@ -22,7 +22,7 @@ def insertUserToCircle(circleId, users):
 
     record = db.circle_user_page.find({"circleId": ObjectId(circleId)}, {"circleId": 1}).limit(1)
     if record:
-        db.circle_user_page.update({"circleId": ObjectId(circleId), "pageIndex": 1},
+        db.circle_user_page.update_one({"circleId": ObjectId(circleId), "pageIndex": 1},
                                    {"$push": {"users": users}})
     else:
         db.circle_user_page.insert({
@@ -36,7 +36,7 @@ def insertUserToCircle(circleId, users):
     record = db.user_circle_relationship.find({"userId": userId}).limit(1)
 
     if record:
-        db.user_circle_relationship.update(({"userId": userId}, {"$push": {"circles": {
+        db.user_circle_relationship.update_one(({"userId": userId}, {"$push": {"circles": {
             "circleId": circleId,
             "userRole": 0,
             "joinTime": datetime.datetime.now()
@@ -70,7 +70,7 @@ while circleId:
         if len(users) < 10000:
             continue
 
-        insertUserToCircle(circleId, users)
+        insertUserToCircle(circleId.replace('\n', ''), users)
 
         print len(users)
         users = []
