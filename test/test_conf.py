@@ -5,7 +5,7 @@ __author__ = 'jiayanchang'
 from bson import ObjectId
 
 
-timeline_mongo_host = dict(host="mongodb://10.47.124.119:30000")
+timeline_mongo_host = dict(host="mongodb://admin:admin@10.47.124.119:30000")
 
 
 users = [
