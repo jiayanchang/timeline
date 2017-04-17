@@ -60,6 +60,7 @@ line = userfile.readline()
 circleId = circlefile.readline()
 
 while circleId:
+    print circleId
     users = []
     while line:
         userId = line.split('\t')[0]
@@ -70,9 +71,7 @@ while circleId:
             continue
 
         insertUserToCircle(circleId.replace('\n', ''), users)
-
-        print len(users)
         users = []
 
-    circleId = userfile.readline()
+    circleId = circlefile.readline()
 
