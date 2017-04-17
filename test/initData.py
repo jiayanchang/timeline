@@ -24,7 +24,7 @@ def insertUserToCircle(circleId, users):
     if len(list(record)) > 0:
         db.circle_user_page.update_one({"circleId": ObjectId(circleId), "pageIndex": 1}, {"$push": {"users": users}}, False)
     else:
-        db.circle_user_page.insert({
+        db.circle_user_page.insert_one({
             "circleId": "58ede8ad0cf28b716ec4cb02",
             "pageIndex": 1,
             "pageCount": 10000,
@@ -41,7 +41,7 @@ def insertUserToCircle(circleId, users):
             "joinTime": datetime.datetime.now()
         }}}, False)
     else:
-        db.user_circle_relationship.insert({
+        db.user_circle_relationship.insert_one({
             "userId": userId,
             "circles": [
                 {
