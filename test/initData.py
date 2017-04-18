@@ -56,7 +56,7 @@ for circleId in circleIds:
 
 print 'userPages', len(userPages)
 
-relatives = []
+# relatives = []
 circles = []
 for circleId in circleIds:
     circles.append({
@@ -65,17 +65,17 @@ for circleId in circleIds:
         "joinTime": datetime.datetime.now()
     })
 
-for user in users:
-    relatives.append({
-        "userId": int(user['userId']),
-        "circles": circles
-    })
+# for user in users:
+#     relatives.append({
+#         "userId": int(user['userId']),
+#         "circles": circles
+#     })
 
-print 'relatives', len(relatives)
+# print 'relatives', len(relatives)
 
 
 for userPage in userPages:
     db.circle_user_page.insert_one(userPage)
 
-for relative in relatives:
-    db.user_circle_relationship.insert_one(relative)
+# for relative in relatives:
+#     db.user_circle_relationship.insert_one(relative)
