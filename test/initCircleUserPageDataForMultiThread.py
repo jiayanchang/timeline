@@ -7,7 +7,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 from bson.json_util import dumps
 from threading import Thread
-from queue import Queue
+import Queue
 
 import random
 import test_conf
@@ -70,7 +70,7 @@ def getPages():
 
 def main():
     pages = getPages()
-    queue = Queue()
+    queue = Queue.Queue(len(pages))
     for x in range(0, 8):
         worker = InsertWorker(queue)
         worker.setDaemon(True)
