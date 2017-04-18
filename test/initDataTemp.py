@@ -13,8 +13,8 @@ import test_conf
 import datetime
 import time
 
-
-client = MongoClient(test_conf.timeline_mongo_host['host'])
+timeline_mongo_host = dict(host="mongodb://114.55.104.39:28020")
+client = MongoClient(timeline_mongo_host['host'])
 db = client.circle_info
 
 circlefile = open("circleId.txt")
@@ -34,11 +34,29 @@ while line:
     users.append({"userId": userId, "userRole": 0, "mobile": str('18000000000'), "sex": -1, "joinTime": datetime.datetime.now()})
     line = userfile.readline()
 
-# userPages = []
+userPages = []
 print 'circleIds', len(circleIds)
 print 'users', len(users)
+for circleId in circleIds:
+    index = 1
+    temps = []
+    for user in users:
+        temps.append(user)
+        if len(temps) < 10000:
+            continue
 
-relatives = []
+        userPages.append({
+            "circleId": circleId,
+            "pageIndex": index,
+            "pageCount": 10000,
+            "users": temps
+        })
+        index += 1
+        temps = []
+
+print 'userPages', len(userPages)
+
+# relatives = []
 circles = []
 for circleId in circleIds:
     circles.append({
@@ -47,17 +65,19 @@ for circleId in circleIds:
         "joinTime": datetime.datetime.now()
     })
 
-for user in users:
-    relatives.append({
-        "userId": int(user['userId']),
-        "circles": circles
-    })
+# for user in users:
+#     relatives.append({
+#         "userId": int(user['userId']),
+#         "circles": circles
+#     })
 
-print 'relatives', len(relatives)
+# print 'relatives', len(relatives)
 
+i = 1
+for userPage in userPages:
+    print i,
+    i += 1
+    db.circle_user_page.insert_one(userPage)
 
-# for userPage in userPages:
-#     db.circle_user_page.insert_one(userPage)
-
-for relative in relatives:
-    db.user_circle_relationship.insert_one(relative)
+# for relative in relatives:
+#     db.user_circle_relationship.insert_one(relative)
