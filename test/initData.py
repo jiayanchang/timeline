@@ -67,7 +67,7 @@ for circleId in circleIds:
 
 for user in users:
     relatives.append({
-        "userId": userId,
+        "userId": int(user['userId']),
         "circles": circles
     })
 
