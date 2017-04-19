@@ -43,7 +43,8 @@ for circleId in circleIds:
     for user in users:
         db.cu_relationship.insert_one({
             "circleId": circleId,
-            "userId": int(user['userId'])
+            "userId": int(user['userId']),
+            "userRole" : 0,
         })
         db.cu_detail.insert_one({
             "_class" : "com.bbtree.service.circle.vo.CircleUserDetail",
