@@ -41,12 +41,11 @@ print 'users', len(users)
 i = 1
 for circleId in circleIds:
     for user in users:
-        userPages.append({
+        db.cu_relationship.insert_one({
             "circleId": circleId,
             "userId": int(user['userId'])
         })
-
-        userDetails.append({
+        db.cu_detail.insert_one({
             "_class" : "com.bbtree.service.circle.vo.CircleUserDetail",
             "circleId" : circleId,
             "userId" : int(user['userId']),
@@ -59,15 +58,7 @@ for circleId in circleIds:
         })
 
         i += 1
-
-print 'userPages', len(userPages)
-
-
-for userPage in userPages:
-    db.cu_relationship.insert_one(userPage)
-
-for userDetail in userDetails:
-    db.cu_detail.insert_one(userDetail)
+        print i
 
 # for relative in relatives:
 #     db.user_circle_relationship.insert_one(relative)
